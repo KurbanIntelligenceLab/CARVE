@@ -1,0 +1,36 @@
+# E3 (Section 6 / Table 9): one component changed at a time from
+# configs/thresholds/carve_primary.yaml. Each row here is a RULE to apply,
+# not a result - the resulting accuracy/re-route-rate numbers are what
+# paper/table9_ablations.py computes and are not stored as configuration.
+ablations:
+  - name: phase_random_k3_joint_masking   # the frozen primary (LVBench)
+    operator: phase_random
+    k: 3
+    masking: joint
+    theta: 0.0
+    comparator: le
+  - name: phase_random_k1
+    operator: phase_random
+    k: 1
+    masking: joint
+    theta: 0.0
+    comparator: le
+  - name: strict_trigger
+    operator: phase_random
+    k: 3
+    masking: joint
+    theta: 0.0
+    comparator: lt   # re-route only on Delta < 0, strictly - excludes Delta=0 ties
+  - name: inclusive_trigger
+    operator: phase_random
+    k: 3
+    masking: joint
+    theta: 0.0
+    comparator: le   # identical to the frozen primary; included so E3's four
+                      # rows are all reproducible from this one file
+  - name: mean_frame_weak_mask
+    operator: mean_frame
+    k: 3
+    masking: joint
+    theta: 0.0
+    comparator: le

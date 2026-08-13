@@ -1,1 +1,25 @@
+# The frozen CARVE decision rule (Section 5), as actually run for Table 7 -
+# this is a RULE (chosen in advance), not a result. The qids it produces
+# when applied to a completed run's Delta values are a derived artifact -
+# see artifacts/trigger_sets/, never here.
+#
+# comparator: le -> re-route when Delta <= theta (accept iff Delta > theta).
+# This is the "Inclusive trigger theta>=0" row in Table 9, not the "Strict
+# trigger theta<0" row - confirmed against the actual trigger-file naming
+# (videomme_trigger_le0.json) and carve_defer_fix.py's live TRIGGER default.
+operator: phase_random
+theta: 0.0
+comparator: le
+re_route_rounds: 1          # R = 1 (Section 6, E2: "the primary controller uses one re-routing round")
+max_clips_on_reroute: 3     # MAX_CLIPS in carve/controller.py
+min_evidence_span_seconds: 10.0
 
+# k: replay draws per condition (sham, destroy) used to estimate delta_hat.
+# THIS DIFFERS BY BENCHMARK AND IS NOT WHAT SECTION 6'S TEXT CLAIMS. See
+# docs/REPRODUCING.md's "k=1 vs k=3" section before treating either value
+# as universal.
+k_by_benchmark:
+  lvbench: 3     # matches the paper's stated "k=3 throughout" protocol
+  videomme: 1    # does NOT match; confirmed against raw replay counts
+                 # (every SHAM/DESTROY record for VideoMME has exactly one
+                 # replay). Only the SELF diagnostic got k=3 on VideoMME.

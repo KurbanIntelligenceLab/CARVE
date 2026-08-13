@@ -1,0 +1,17 @@
+[project]
+name = "carve"
+version = "0.1.0"
+description = "Counterfactual Attribution and Re-grounding of Video Evidence: a training-free, black-box controller for tool-using video agents."
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pillow",
+    "pyyaml",
+    "scikit-learn",
+]
+
+[tool.setuptools.packages.find]
+include = ["carve*", "baselines*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

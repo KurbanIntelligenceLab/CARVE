@@ -1,5 +1,9 @@
 # CARVE
 
+<p align="center">
+  <img src="figures/teaser.png" width="900">
+</p>
+
 CARVE is a training-free, black-box counterfactual probe for auditing
 tool-using video agents.
 
